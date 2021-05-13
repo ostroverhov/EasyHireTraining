@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Threading;
 using NUnit.Framework;
-using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
 
@@ -36,12 +34,6 @@ namespace SpecFlowEasyHire.Steps
             _takeInterviewForm.ClickSelectQuestionCategoryComboBox();
             _takeInterviewForm.ClickComboBoxItem(new Random().Next(_takeInterviewForm.SizeComboBox()));
         }
-        
-        // [When("click random question category on dialog form")]
-        // public void WhenClickRandomQuestionCategoryOnDialogForm()
-        // {
-        //     _takeInterviewForm.ClickQuestionCategoryLabel(new Random().Next(_takeInterviewForm.SizeQuestionCategory()).ToString());
-        // }
         
         [When("type email for take interview (.*)")]
         public void WhenTypeEmailForTakeInterview(string email)

@@ -8,12 +8,10 @@ namespace SpecFlowEasyHire.Steps
     public sealed class JobDescriptionPageSteps
     {
         private readonly JobDescriptionPage _jobDescriptionPage;
-        private readonly ScenarioContext _scenarioContext;
 
-        public JobDescriptionPageSteps(JobDescriptionPage jobDescriptionPage, ScenarioContext scenarioContext)
+        public JobDescriptionPageSteps(JobDescriptionPage jobDescriptionPage)
         {
             _jobDescriptionPage = jobDescriptionPage;
-            _scenarioContext = scenarioContext;
         }
 
         [Then("job description page is present")]
