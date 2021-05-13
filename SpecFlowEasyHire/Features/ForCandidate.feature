@@ -1,4 +1,5 @@
-﻿Feature: For candidate page
+﻿@web
+Feature: For candidate page
 
     Background:
         Given main page is present

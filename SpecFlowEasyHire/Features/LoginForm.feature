@@ -1,4 +1,5 @@
-﻿Feature: Login form
+﻿@web
+Feature: Login form
 
     Background:
         Given main page is present

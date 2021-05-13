@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Framework.Models;
 using Framework.Utils;
 using OpenQA.Selenium;
@@ -62,6 +63,11 @@ namespace Framework.Drivers
         public static void SetUrl() {
             Logger.Info($"Set URL [{BrowserSettings.Url}]");
             _driver.Navigate().GoToUrl(BrowserSettings.Url);
+        }
+        
+        public static void SwitchToLastTab() {
+            Logger.Info($"Switch to last tab");
+            _driver.SwitchTo().Window(_driver.WindowHandles.Last());
         }
     }
 }

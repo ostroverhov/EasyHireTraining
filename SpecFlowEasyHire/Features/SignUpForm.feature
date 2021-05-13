@@ -1,4 +1,5 @@
-﻿Feature: SignUpForm
+﻿@web
+Feature: SignUpForm
 
     Background:
         Given main page is present

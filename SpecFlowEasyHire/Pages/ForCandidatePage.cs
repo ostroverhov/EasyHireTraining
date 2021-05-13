@@ -16,7 +16,7 @@ namespace SpecFlowEasyHire.Pages
         private ComboBox SelectQuestionCategoryComboBox => new ComboBox("Select question category",
             By.XPath(
                 "//label[contains(text(), 'Select question category')]/following-sibling::div//input"));
-        private Label ComboBoxItemLabel => new Label($"ComboBox item",
+        private Label ComboBoxItemLabel => new Label("ComboBox item",
             By.CssSelector("[role=option]"));
 
         private Button TakeInterviewButtonOnPanel => new Button("Take interview on panel",

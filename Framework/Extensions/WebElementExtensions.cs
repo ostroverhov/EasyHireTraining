@@ -14,5 +14,9 @@ namespace Framework.Extensions
         public static bool WaitForDisplayed(this IWebElement element) => 
             new WebDriverWait(BrowserFactory.InitBrowser(), TimeSpan.FromSeconds(BrowserSettings.ImplicitlyWait))
                 .Until(condition => element.Displayed);
+        
+        public static bool WaitForText(this IWebElement element) => 
+            new WebDriverWait(BrowserFactory.InitBrowser(), TimeSpan.FromSeconds(BrowserSettings.ImplicitlyWait))
+                .Until(condition => element.Text != string.Empty);
     }
 }

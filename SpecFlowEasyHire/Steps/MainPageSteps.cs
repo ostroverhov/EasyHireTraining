@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Framework.Drivers;
+using NUnit.Framework;
 using SpecFlowEasyHire.Pages;
 using TechTalk.SpecFlow;
 
@@ -24,6 +25,12 @@ namespace SpecFlowEasyHire.Steps
         public void WhenClickSignUpButtonFromMainPage()
         {
             _mainPage.ClickSignUpButton();            
+        }
+        
+        [When("switch to last tab")]
+        public void WhenSwitchToLastTab()
+        {
+            BrowserFactory.SwitchToLastTab();            
         }
     }
 }

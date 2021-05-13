@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Framework.Drivers;
+using Framework.Extensions;
 using Framework.Utils;
 using OpenQA.Selenium;
 
@@ -56,6 +57,12 @@ namespace Framework.Elements
             return GetElement().Text;
         }
         
+        public string GetValue()
+        {
+            Logger.Info($"Get value from element [{Name}]");
+            return GetElement().GetAttribute("value");
+        }
+        
         public int CountElements()
         {
             Logger.Info($"Get count of elements [{Name}]");
@@ -66,6 +73,13 @@ namespace Framework.Elements
         {
             Logger.Info($"Click element [{elementNumber}] from List [{Name}]");
             GetElements()[elementNumber].Click();
+        }
+        
+        public string GetElementTextFromList(int elementNumber)
+        {
+            Logger.Info($"Get text from element [{elementNumber}] from List [{Name}]");
+            GetElements()[elementNumber].WaitForText();
+            return GetElements()[elementNumber].Text;
         }
     }
 }

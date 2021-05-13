@@ -17,7 +17,7 @@ namespace SpecFlowEasyHire.Pages.Forms
         private IDictionary<HeaderButtonItem, string> NameHeaderButton => new Dictionary<HeaderButtonItem, string>
         {
             { HeaderButtonItem.Pricing, "Pricing"},
-            { HeaderButtonItem.JobBoard, "Job Board"},
+            { HeaderButtonItem.JobBoard, "Job board"},
             { HeaderButtonItem.Demo, "Demo"},
             { HeaderButtonItem.ForCandidate, "For candidate"},
             { HeaderButtonItem.Blog, "Blog"},

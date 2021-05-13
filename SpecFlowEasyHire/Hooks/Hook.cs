@@ -16,7 +16,7 @@ namespace SpecFlowEasyHire.Hooks
         private static string ScenarioName => TestContext.CurrentContext.Test.Name.Replace("_", string.Empty).Humanize();
         private static Logger Logger => Logger.Instance;
         
-        [BeforeScenario]
+        [BeforeScenario("web")]
         public static void BeforeScenario()
         {
             Logger.Info($"{new string('=', 100)} {Environment.NewLine} {new string(' ', 40)} Start scenario [{ScenarioName}]");
@@ -26,7 +26,7 @@ namespace SpecFlowEasyHire.Hooks
             BrowserFactory.SetUrl();
         }
         
-        [AfterScenario]
+        [AfterScenario("web")]
         public static void AfterScenario()
         {
             SavePageSource();
