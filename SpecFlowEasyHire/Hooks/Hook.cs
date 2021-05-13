@@ -8,7 +8,6 @@ namespace SpecFlowEasyHire.Hooks
     [Binding]
     public class Hooks
     {
-        private const string PageSourceFormat = ".html";
         private static Logger Logger => Logger.Instance;
         
         [BeforeScenario("web")]
