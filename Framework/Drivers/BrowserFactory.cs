@@ -11,33 +11,38 @@ using JsonReader = Framework.Utils.JsonReader;
 
 namespace Framework.Drivers
 {
-    public class BrowserFactory
+    public sealed class BrowserFactory
     {
         private static IWebDriver _driver;
         private static Logger Logger => Logger.Instance;
         private static readonly BrowserSettings BrowserSettings = JsonReader.SetConfigModel<BrowserSettings>();
         
+        private static readonly object TestLock  = new object();  
         private BrowserFactory() {
         }
         
         public static IWebDriver InitBrowser() 
         {
-            if (_driver == null)
+            lock(TestLock)
             {
-                Logger.Info($"Browser [{BrowserSettings.Browser}] init");
-                switch (BrowserSettings.Browser)
+                if (_driver == null)
                 {
-                    case "chrome":
-                        new DriverManager().SetUpDriver(new ChromeConfig());
-                        _driver = new ChromeDriver();
-                        break;
-                    case "firefox":
-                        new DriverManager().SetUpDriver(new FirefoxConfig());
-                        _driver = new FirefoxDriver();
-                        break;
+                    Logger.Info($"Browser [{BrowserSettings.Browser}] init");
+                    switch (BrowserSettings.Browser)
+                    {
+                        case "chrome":
+                            new DriverManager().SetUpDriver(new ChromeConfig());
+                            _driver = new ChromeDriver();
+                            break;
+                        case "firefox":
+                            new DriverManager().SetUpDriver(new FirefoxConfig());
+                            _driver = new FirefoxDriver();
+                            break;
+                    }
                 }
+                return _driver;
             }
-            return _driver;
+
         }
         
         public static void CloseBrowser() {
