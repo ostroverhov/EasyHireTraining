@@ -1,5 +1,5 @@
 ﻿using Framework.Drivers;
-using NUnit.Framework;
+using Xunit;
 using SpecFlowEasyHire.Pages;
 using TechTalk.SpecFlow;
 
@@ -18,7 +18,7 @@ namespace SpecFlowEasyHire.Steps
         [Given("main page is present")]
         public void GivenMainPageIsPresent()
         {
-            Assert.IsTrue(_mainPage.IsPagePresent(), "Main page should be present");
+            Assert.True(_mainPage.IsPagePresent(), "Main page should be present");
         }
 
         [When("click sign up button from main page")]

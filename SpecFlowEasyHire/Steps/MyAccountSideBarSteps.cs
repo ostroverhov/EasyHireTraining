@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
 
@@ -17,7 +17,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("my account side bar should be presented")]
         public void ThenMyAccountSideBarShouldBePresented()
         {
-            Assert.IsTrue(_myAccountSideBar.IsPagePresent(), "My account side bar should be presented");
+            Assert.True(_myAccountSideBar.IsPagePresent(), "My account side bar should be presented");
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System.Threading;
-using NUnit.Framework;
+using Xunit;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
@@ -19,7 +19,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("login form should be presented")]
         public void ThenLoginFormShouldBePresented()
         {
-            Assert.IsTrue(_loginForm.IsPagePresent(), "Login form should be presented");
+            Assert.True(_loginForm.IsPagePresent(), "Login form should be presented");
         }
 
         [When("type login data")]
@@ -38,14 +38,13 @@ namespace SpecFlowEasyHire.Steps
         [Then("login button is not active")]
         public void ThenLoginButtonIsNotActive()
         {
-            Assert.IsFalse(_loginForm.IsLoginButtonPresent(), "Login button should not be active");
+            Assert.False(_loginForm.IsLoginButtonPresent(), "Login button should not be active");
         }
         
         [Then("check account not found alert message")]
         public void ThenCheckAccountNotFoundAlertMessage()
         {
-            StringAssert.Contains(_loginForm.GetTextFromAlert(), "Account not found. Please sign up", 
-                "Alert message is not correct");
+            Assert.Contains(_loginForm.GetTextFromAlert(), "Account not found. Please sign up");
         }
     }
 }

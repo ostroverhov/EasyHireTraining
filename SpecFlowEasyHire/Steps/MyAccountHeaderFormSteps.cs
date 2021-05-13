@@ -1,5 +1,5 @@
 ﻿using Framework.Utils;
-using NUnit.Framework;
+using Xunit;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
@@ -20,7 +20,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("my account header form should be presented")]
         public void ThenMyAccountHeaderFormShouldBePresented()
         {
-            Assert.IsTrue(_myAccountHeaderForm.IsPagePresent(), "My account header form should be presented");
+            Assert.True(_myAccountHeaderForm.IsPagePresent(), "My account header form should be presented");
         }
         
         [When("click menu button on my account")]
@@ -32,7 +32,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("side menu on my account is present")]
         public void ThenSideMenuOnMyAccountIsPresent()
         {
-            Assert.IsTrue(_myAccountHeaderForm.IsSideMenuPresent(), "Side menu should be presented");
+            Assert.True(_myAccountHeaderForm.IsSideMenuPresent(), "Side menu should be presented");
         }
         
         [When("click button (.*) on side menu on my account")]
@@ -44,18 +44,15 @@ namespace SpecFlowEasyHire.Steps
         [Then("user profile on my account is present")]
         public void ThenUserProfileOnMyAccountIsPresent()
         {
-            Assert.IsTrue(_myAccountHeaderForm.IsUserProfilePresent(), "User profile should be presented");
+            Assert.True(_myAccountHeaderForm.IsUserProfilePresent(), "User profile should be presented");
         }
         
         [Then("check profile information on my account")]
         public void ThenCheckProfileInformationOnMyAccount()
         {
-            Assert.Multiple(() =>
-            {
-                Assert.AreEqual(TestUser.FirstName, _myAccountHeaderForm.GetValueFromFirstNameLabel, "First names should be equal");
-                Assert.AreEqual(TestUser.LastName, _myAccountHeaderForm.GetValueFromLastNameLabel, "Last names should be equal");
-                Assert.AreEqual(TestUser.Email, _myAccountHeaderForm.GetValueFromEmailLabel, "emails should be equal");
-            });
+            Assert.Equal(TestUser.FirstName, _myAccountHeaderForm.GetValueFromFirstNameLabel);
+            Assert.Equal(TestUser.LastName, _myAccountHeaderForm.GetValueFromLastNameLabel);
+            Assert.Equal(TestUser.Email, _myAccountHeaderForm.GetValueFromEmailLabel);
         }
     }
 }
