@@ -1,4 +1,4 @@
-﻿using System.Threading;
+﻿using Framework.Drivers;
 using NUnit.Framework;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
@@ -11,9 +11,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly LoginForm _loginForm;
 
-        public LoginSteps(LoginForm loginForm)
+        public LoginSteps(BrowserFactory browserFactory)
         {
-            _loginForm = loginForm;
+            _loginForm = new LoginForm(browserFactory.Current);
         }
 
         [Then("login form should be presented")]

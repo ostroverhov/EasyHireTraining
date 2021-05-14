@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Framework.Drivers;
+using NUnit.Framework;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
@@ -10,9 +11,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly SignUpForm _signUpForm;
 
-        public SignUpSteps(SignUpForm signUpForm)
+        public SignUpSteps(BrowserFactory browserFactory)
         {
-            _signUpForm = signUpForm;
+            _signUpForm = new SignUpForm(browserFactory.Current);
         }
 
         [Then("sign up form should be presented")]

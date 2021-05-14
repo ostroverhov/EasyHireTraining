@@ -1,5 +1,4 @@
 ﻿using System;
-using Framework.Drivers;
 using Framework.Models;
 using Framework.Utils;
 using OpenQA.Selenium;
@@ -11,12 +10,12 @@ namespace Framework.Extensions
     {
         private static readonly BrowserSettings BrowserSettings = JsonReader.SetConfigModel<BrowserSettings>();
         
-        public static bool WaitForDisplayed(this IWebElement element) => 
-            new WebDriverWait(BrowserFactory.InitBrowser(), TimeSpan.FromSeconds(BrowserSettings.ImplicitlyWait))
+        public static bool WaitForDisplayed(this IWebElement element, IWebDriver webDriver) => 
+            new WebDriverWait(webDriver, TimeSpan.FromSeconds(BrowserSettings.ImplicitlyWait))
                 .Until(condition => element.Displayed);
         
-        public static bool WaitForText(this IWebElement element) => 
-            new WebDriverWait(BrowserFactory.InitBrowser(), TimeSpan.FromSeconds(BrowserSettings.ImplicitlyWait))
+        public static bool WaitForText(this IWebElement element, IWebDriver webDriver) => 
+            new WebDriverWait(webDriver, TimeSpan.FromSeconds(BrowserSettings.ImplicitlyWait))
                 .Until(condition => element.Text != string.Empty);
     }
 }

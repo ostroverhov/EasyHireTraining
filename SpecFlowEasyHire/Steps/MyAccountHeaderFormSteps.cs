@@ -1,4 +1,5 @@
-﻿using Framework.Utils;
+﻿using Framework.Drivers;
+using Framework.Utils;
 using NUnit.Framework;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
@@ -12,9 +13,9 @@ namespace SpecFlowEasyHire.Steps
         private readonly MyAccountHeaderForm _myAccountHeaderForm;
         private static readonly SignUpUser TestUser = JsonReader.SetConfigModel<SignUpUser>();
 
-        public MyAccountHeaderFormSteps(MyAccountHeaderForm myAccountHeaderForm)
+        public MyAccountHeaderFormSteps(BrowserFactory browserFactory)
         {
-            _myAccountHeaderForm = myAccountHeaderForm;
+            _myAccountHeaderForm = new MyAccountHeaderForm(browserFactory.Current);
         }
 
         [Then("my account header form should be presented")]

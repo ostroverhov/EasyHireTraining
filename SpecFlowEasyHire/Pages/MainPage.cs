@@ -5,11 +5,11 @@ namespace SpecFlowEasyHire.Pages
 {
     public class MainPage: BasePage
     {
-        public MainPage() : base(nameof(MainPage), By.TagName("video"))
+        public MainPage(IWebDriver webDriver) : base(nameof(MainPage), By.TagName("video"), webDriver)
         {
         }
 
-        private Button SignUpButton => new Button("Sign Up", By.XPath("//span[contains(text(), 'Free sign up')]"));
+        private Button SignUpButton => new Button("Sign Up", By.XPath("//span[contains(text(), 'Free sign up')]"), WebDriver);
 
         public void ClickSignUpButton() => SignUpButton.Click();
     }

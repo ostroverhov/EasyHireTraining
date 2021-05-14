@@ -17,20 +17,19 @@ namespace SpecFlowEasyHire.Hooks
         private static Logger Logger => Logger.Instance;
         
         [BeforeScenario("web")]
-        public static void BeforeScenario()
+        public static void BeforeScenario(BrowserFactory browserFactory)
         {
             Logger.Info($"{new string('=', 100)} {Environment.NewLine} {new string(' ', 40)} Start scenario [{ScenarioName}]");
-            BrowserFactory.InitBrowser();
-            BrowserFactory.SetMaxSizeWindow();
-            BrowserFactory.SetImplicitlyWait();
-            BrowserFactory.SetUrl();
+            BrowserFactory.SetMaxSizeWindow(browserFactory.Current);
+            BrowserFactory.SetImplicitlyWait(browserFactory.Current);
+            BrowserFactory.SetUrl(browserFactory.Current);
         }
         
         [AfterScenario("web")]
-        public static void AfterScenario()
+        public static void AfterScenario(BrowserFactory browserFactory)
         {
-            SavePageSource();
-            BrowserFactory.CloseBrowser();
+            SavePageSource(browserFactory);
+            BrowserFactory.CloseBrowser(browserFactory.Current);
             LogTestResults();
         }
         
@@ -44,11 +43,11 @@ namespace SpecFlowEasyHire.Hooks
             }
         }
 
-        private static void SavePageSource()
+        private static void SavePageSource(BrowserFactory browserFactory)
         {
             Logger.Info($"Save page source for [{ScenarioName}]");
             var source = ScenarioName + PageSourceFormat;
-            File.WriteAllText(source, BrowserFactory.InitBrowser().PageSource);
+            File.WriteAllText(source, browserFactory.Current.PageSource);
             TestContext.AddTestAttachment(source);
         }
     }

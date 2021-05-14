@@ -7,72 +7,64 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
-using JsonReader = Framework.Utils.JsonReader;
 
 namespace Framework.Drivers
 {
-    public sealed class BrowserFactory
+    public class BrowserFactory
     {
-        private static IWebDriver _driver;
         private static Logger Logger => Logger.Instance;
-        private static readonly BrowserSettings BrowserSettings = JsonReader.SetConfigModel<BrowserSettings>();
-        
-        private static readonly object TestLock  = new object();  
-        private BrowserFactory() {
-        }
-        
-        public static IWebDriver InitBrowser() 
+        private static  readonly BrowserSettings BrowserSettings = JsonReader.SetConfigModel<BrowserSettings>();
+        private readonly Lazy<IWebDriver> _currentWebDriverLazy;
+        public BrowserFactory()
         {
-            lock(TestLock)
-            {
-                if (_driver == null)
-                {
-                    Logger.Info($"Browser [{BrowserSettings.Browser}] init");
-                    switch (BrowserSettings.Browser)
-                    {
-                        case "chrome":
-                            new DriverManager().SetUpDriver(new ChromeConfig());
-                            _driver = new ChromeDriver();
-                            break;
-                        case "firefox":
-                            new DriverManager().SetUpDriver(new FirefoxConfig());
-                            _driver = new FirefoxDriver();
-                            break;
-                    }
-                }
-                return _driver;
-            }
-
+            _currentWebDriverLazy = new Lazy<IWebDriver>(InitBrowser);
         }
         
-        public static void CloseBrowser() {
-            Logger.Info("Close browser");
-            if (_driver != null) {
-                _driver.Quit();
+        public IWebDriver InitBrowser()
+        {
+            IWebDriver driver = null;
+            Logger.Info($"Browser [{BrowserSettings.Browser}] init");
+            switch (BrowserSettings.Browser)
+            {
+                case "chrome":
+                    new DriverManager().SetUpDriver(new ChromeConfig());
+                    driver = new ChromeDriver();
+                    break;
+                case "firefox":
+                    new DriverManager().SetUpDriver(new FirefoxConfig());
+                    driver = new FirefoxDriver();
+                    break;
             }
-            _driver = null;
+            return driver;
+        }
+        
+        public IWebDriver Current => _currentWebDriverLazy.Value;
+        
+        public static void CloseBrowser(IWebDriver driver) {
+            Logger.Info("Close browser");
+            driver.Quit();
         }
 
-        public static void SetImplicitlyWait() 
+        public static void SetImplicitlyWait(IWebDriver driver) 
         {
             Logger.Info($"Set Implicitly Wait [{BrowserSettings.ImplicitlyWait}]");
-            _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(BrowserSettings.ImplicitlyWait);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(BrowserSettings.ImplicitlyWait);
         }
 
-        public static void SetMaxSizeWindow() 
+        public static void SetMaxSizeWindow(IWebDriver driver) 
         {
             Logger.Info($"Set max size window");
-            _driver.Manage().Window.Maximize();
+            driver.Manage().Window.Maximize();
         }
 
-        public static void SetUrl() {
+        public static void SetUrl(IWebDriver driver) {
             Logger.Info($"Set URL [{BrowserSettings.Url}]");
-            _driver.Navigate().GoToUrl(BrowserSettings.Url);
+            driver.Navigate().GoToUrl(BrowserSettings.Url);
         }
         
-        public static void SwitchToLastTab() {
+        public static void SwitchToLastTab(IWebDriver driver) {
             Logger.Info($"Switch to last tab");
-            _driver.SwitchTo().Window(_driver.WindowHandles.Last());
+            driver.SwitchTo().Window(driver.WindowHandles.Last());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Framework.Drivers;
+using NUnit.Framework;
 using SpecFlowEasyHire.Pages;
 using TechTalk.SpecFlow;
 
@@ -9,9 +10,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly JobDescriptionPage _jobDescriptionPage;
 
-        public JobDescriptionPageSteps(JobDescriptionPage jobDescriptionPage)
+        public JobDescriptionPageSteps(BrowserFactory browserFactory)
         {
-            _jobDescriptionPage = jobDescriptionPage;
+            _jobDescriptionPage = new JobDescriptionPage(browserFactory.Current);
         }
 
         [Then("job description page is present")]

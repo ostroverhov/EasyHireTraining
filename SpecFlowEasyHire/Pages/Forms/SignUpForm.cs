@@ -6,20 +6,20 @@ namespace SpecFlowEasyHire.Pages.Forms
 {
     public class SignUpForm: BasePage
     {
-        public SignUpForm() : base(nameof(SignUpForm), By.CssSelector("header.MuiPaper-root"))
+        public SignUpForm(IWebDriver webDriver) : base(nameof(SignUpForm), By.CssSelector("header.MuiPaper-root"), webDriver)
         {
         }
         
         private Button AccountButton(AccountTypeItem item) => 
-            new Button($"Account type [{item}]", By.XPath($"//span[contains(text(), '{AccountTypeButton[item]}') and @class='MuiTab-wrapper']"));
-        private TextBox EmailTextBox => new TextBox("Email", By.Name("email"));
-        private TextBox FirstNameTextBox => new TextBox("First name", By.Name("firstName"));
-        private TextBox LastNameTextBox => new TextBox("Last name", By.Name("lastName"));
-        private TextBox PasswordTextBox => new TextBox("Password", By.Name("password"));
-        private CheckBox TermsAndConditionsCheckBox => new CheckBox("Terms and conditions", By.Name("termAgree"));
-        private Label SignUpAlertLabel => new Label("Sign Up", By.Id("message-id"));
+            new Button($"Account type [{item}]", By.XPath($"//span[contains(text(), '{AccountTypeButton[item]}') and @class='MuiTab-wrapper']"), WebDriver);
+        private TextBox EmailTextBox => new TextBox("Email", By.Name("email"), WebDriver);
+        private TextBox FirstNameTextBox => new TextBox("First name", By.Name("firstName"), WebDriver);
+        private TextBox LastNameTextBox => new TextBox("Last name", By.Name("lastName"), WebDriver);
+        private TextBox PasswordTextBox => new TextBox("Password", By.Name("password"), WebDriver);
+        private CheckBox TermsAndConditionsCheckBox => new CheckBox("Terms and conditions", By.Name("termAgree"), WebDriver);
+        private Label SignUpAlertLabel => new Label("Sign Up", By.Id("message-id"), WebDriver);
         private Button SignUpButton => new Button("Sign Up",
-            By.XPath("//button//span[@class='MuiTouchRipple-root']/preceding-sibling::span[contains(text(), 'Sign up')]"));
+            By.XPath("//button//span[@class='MuiTouchRipple-root']/preceding-sibling::span[contains(text(), 'Sign up')]"), WebDriver);
         
         private IDictionary<AccountTypeItem, string> AccountTypeButton => new Dictionary<AccountTypeItem, string>
         {

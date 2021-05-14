@@ -1,4 +1,5 @@
 ﻿using System;
+using Framework.Drivers;
 using NUnit.Framework;
 using SpecFlowEasyHire.Pages;
 using TechTalk.SpecFlow;
@@ -10,9 +11,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly ForCandidatePage _forCandidatePage;
 
-        public ForCandidateSteps(ForCandidatePage forCandidatePage)
+        public ForCandidateSteps(BrowserFactory browserFactory)
         {
-            _forCandidatePage = forCandidatePage;
+            _forCandidatePage = new ForCandidatePage(browserFactory.Current);
         }
 
         [Then("for candidate page should be presented")]

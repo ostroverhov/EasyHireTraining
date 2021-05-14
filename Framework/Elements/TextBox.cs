@@ -4,7 +4,7 @@ namespace Framework.Elements
 {
     public class TextBox : BaseElement
     {
-        public TextBox(string name, By locator) : base($"{name} {nameof(TextBox)}", locator)
+        public TextBox(string name, By locator, IWebDriver webDriver) : base($"{name} {nameof(TextBox)}", locator, webDriver)
         {
         }
         

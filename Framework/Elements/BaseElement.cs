@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Framework.Drivers;
 using Framework.Extensions;
 using Framework.Utils;
 using OpenQA.Selenium;
@@ -9,25 +8,27 @@ namespace Framework.Elements
     public abstract class BaseElement
     {
         protected readonly string Name;
-        protected readonly By Locator;
+        private readonly By _locator;
+        private readonly IWebDriver _webDriver;
         protected static Logger Logger => Logger.Instance;
 
-        public BaseElement(string name, By locator)
+        public BaseElement(string name, By locator, IWebDriver webDriver)
         {
             Name = name;
-            Locator = locator;
+            _locator = locator;
+            _webDriver = webDriver;
         }
         
         public IWebElement GetElement() 
         {
             Logger.Info($"Get element [{Name}]");
-            return BrowserFactory.InitBrowser().FindElement(Locator);
+            return _webDriver.FindElement(_locator);
         }
 
         public IList<IWebElement> GetElements() 
         {
             Logger.Info($"Get list elements [{Name}]");
-            return BrowserFactory.InitBrowser().FindElements(Locator);
+            return _webDriver.FindElements(_locator);
         }
         
         public bool IsDisplayed() {
@@ -78,7 +79,7 @@ namespace Framework.Elements
         public string GetElementTextFromList(int elementNumber)
         {
             Logger.Info($"Get text from element [{elementNumber}] from List [{Name}]");
-            GetElements()[elementNumber].WaitForText();
+            GetElements()[elementNumber].WaitForText(_webDriver);
             return GetElements()[elementNumber].Text;
         }
     }

@@ -1,21 +1,19 @@
-﻿using System.Threading;
-using Framework.Elements;
-using NLog.Fluent;
+﻿using Framework.Elements;
 using OpenQA.Selenium;
 
 namespace SpecFlowEasyHire.Pages.Forms
 {
     public class LoginForm : BasePage
     {
-        public LoginForm() : base(nameof(LoginForm), By.CssSelector("header.MuiPaper-root"))
+        public LoginForm(IWebDriver webDriver) : base(nameof(LoginForm), By.CssSelector("header.MuiPaper-root"), webDriver)
         {
         }
 
-        private TextBox EmailTextBox => new TextBox($"Login", By.Name("email"));
-        private TextBox PasswordTextBox => new TextBox("Password", By.Name("password"));
+        private TextBox EmailTextBox => new TextBox($"Login", By.Name("email"), WebDriver);
+        private TextBox PasswordTextBox => new TextBox("Password", By.Name("password"), WebDriver);
         private Button LoginButton => new Button("Login",
-            By.XPath("//button//span[@class='MuiTouchRipple-root']/preceding-sibling::span[contains(text(), 'Log in')]"));
-        private Label AccountNotFoundAlertLabel => new Label("Account not found alert", By.Id("message-id"));
+            By.XPath("//button//span[@class='MuiTouchRipple-root']/preceding-sibling::span[contains(text(), 'Log in')]"), WebDriver);
+        private Label AccountNotFoundAlertLabel => new Label("Account not found alert", By.Id("message-id"), WebDriver);
 
         public LoginForm TypeEmail(string email)
         {

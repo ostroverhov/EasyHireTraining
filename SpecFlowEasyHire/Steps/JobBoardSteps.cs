@@ -1,4 +1,5 @@
 ﻿using System;
+using Framework.Drivers;
 using NUnit.Framework;
 using SpecFlowEasyHire.Pages;
 using TechTalk.SpecFlow;
@@ -11,9 +12,9 @@ namespace SpecFlowEasyHire.Steps
         private readonly JobBoardPage _jobBoardPage;
         private readonly ScenarioContext _scenarioContext;
 
-        public JobBoardSteps(JobBoardPage jobBoardPage, ScenarioContext scenarioContext)
+        public JobBoardSteps(BrowserFactory browserFactory, ScenarioContext scenarioContext)
         {
-            _jobBoardPage = jobBoardPage;
+            _jobBoardPage = new JobBoardPage(browserFactory.Current);
             _scenarioContext = scenarioContext;
         }
 

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Framework.Drivers;
+using NUnit.Framework;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
 
@@ -9,9 +10,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly MyAccountSideBar _myAccountSideBar;
 
-        public MyAccountSideBarSteps(MyAccountSideBar myAccountSideBar)
+        public MyAccountSideBarSteps(BrowserFactory browserFactory)
         {
-            _myAccountSideBar = myAccountSideBar;
+            _myAccountSideBar = new MyAccountSideBar(browserFactory.Current);
         }
 
         [Then("my account side bar should be presented")]

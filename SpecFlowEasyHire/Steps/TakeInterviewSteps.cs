@@ -1,4 +1,5 @@
 ﻿using System;
+using Framework.Drivers;
 using NUnit.Framework;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
@@ -10,9 +11,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly TakeInterviewForm _takeInterviewForm;
 
-        public TakeInterviewSteps(TakeInterviewForm takeInterviewForm)
+        public TakeInterviewSteps(BrowserFactory browserFactory)
         {
-            _takeInterviewForm = takeInterviewForm;
+            _takeInterviewForm = new TakeInterviewForm(browserFactory.Current);
         }
 
         [Then("take interview form should be presented")]
