@@ -1,7 +1,7 @@
 ﻿using Framework.Drivers;
-using NUnit.Framework;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
+using Xunit;
 
 namespace SpecFlowEasyHire.Steps
 {
@@ -24,7 +24,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("header form is present")]
         public void ThenHeaderFormIsPresent()
         {
-            Assert.IsTrue(_headerForm.IsPagePresent(), "Header form should be presented");
+            Assert.True(_headerForm.IsPagePresent(), "Header form should be presented");
         }
     }
 }

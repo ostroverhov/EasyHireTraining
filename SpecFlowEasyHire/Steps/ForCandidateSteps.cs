@@ -1,8 +1,8 @@
 ﻿using System;
 using Framework.Drivers;
-using NUnit.Framework;
 using SpecFlowEasyHire.Pages;
 using TechTalk.SpecFlow;
+using Xunit;
 
 namespace SpecFlowEasyHire.Steps
 {
@@ -19,7 +19,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("for candidate page should be presented")]
         public void ThenForCandidatePageShouldBePresented()
         {
-            Assert.IsTrue(_forCandidatePage.IsPagePresent(), "For candidate page should be presented");
+            Assert.True(_forCandidatePage.IsPagePresent(), "For candidate page should be presented");
         }
         
         [When("click take practice interview button")]

@@ -1,8 +1,8 @@
 ﻿using Framework.Drivers;
-using NUnit.Framework;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
+using Xunit;
 
 namespace SpecFlowEasyHire.Steps
 {
@@ -19,7 +19,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("sign up form should be presented")]
         public void ThenSignUpFormShouldBePresented()
         {
-            Assert.IsTrue(_signUpForm.IsPagePresent(), "Sign up form should be presented");
+            Assert.True(_signUpForm.IsPagePresent(), "Sign up form should be presented");
         }
 
         [When("select account (.*)")]
@@ -52,14 +52,13 @@ namespace SpecFlowEasyHire.Steps
         [Then("check sign up alert message")]
         public void ThenCheckSignUpAlertMessage()
         {
-            StringAssert.Contains(_signUpForm.GetTextFromSignUpAlert(), "Thank you for signing up! Please check your email to activate your account.", 
-                "Sign up alert message is not correct");
+            Assert.Contains(_signUpForm.GetTextFromSignUpAlert(), "Thank you for signing up! Please check your email to activate your account.");
         }
         
         [Then("sign up button is not active")]
         public void ThenSignUpButtonIsNotActive()
         {
-            Assert.IsFalse(_signUpForm.IsSignUpButtonPresent(), "Sign up button should not be active");
+            Assert.False(_signUpForm.IsSignUpButtonPresent(), "Sign up button should not be active");
         }
     }
 }

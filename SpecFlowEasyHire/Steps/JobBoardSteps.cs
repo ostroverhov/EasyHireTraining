@@ -1,8 +1,8 @@
 ﻿using System;
 using Framework.Drivers;
-using NUnit.Framework;
 using SpecFlowEasyHire.Pages;
 using TechTalk.SpecFlow;
+using Xunit;
 
 namespace SpecFlowEasyHire.Steps
 {
@@ -21,7 +21,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("job board page is present")]
         public void ThenJobBoardPageIsPresent()
         {
-            Assert.IsTrue(_jobBoardPage.IsPagePresent(), "Job board page should be present");
+            Assert.True(_jobBoardPage.IsPagePresent(), "Job board page should be present");
         }
 
         [When("click random job label")]
@@ -40,7 +40,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("check search key word")]
         public void ThenCheckSearchKeyWord()
         {
-            Assert.AreEqual(_scenarioContext.Get<string>("keyWord"), _jobBoardPage.GetValueFromSearchTextBox(), "Search key words should be equals");
+            Assert.Equal(_scenarioContext.Get<string>("keyWord"), _jobBoardPage.GetValueFromSearchTextBox());
         }
         
         [When("select random country")]
@@ -55,7 +55,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("check select by country field")]
         public void ThenCheckSelectByCountryField()
         {
-            Assert.AreEqual(_scenarioContext.Get<string>("Country"), _jobBoardPage.GetValueFromSearchByCountryComboBox(), "Countries should be equals");
+            Assert.Equal(_scenarioContext.Get<string>("Country"), _jobBoardPage.GetValueFromSearchByCountryComboBox());
         }
         
         [When("select random salary range")]
@@ -70,7 +70,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("check salary range field")]
         public void ThenCheckSalaryRangeField()
         {
-            Assert.AreEqual(_scenarioContext.Get<string>("Salary"), _jobBoardPage.GetValueFromSalaryRateComboBox(), "Salaries should be equals");
+            Assert.Equal(_scenarioContext.Get<string>("Salary"), _jobBoardPage.GetValueFromSalaryRateComboBox());
         }
         
         [When("select random currency")]
@@ -85,7 +85,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("check currency field")]
         public void ThenCheckCurrencyField()
         {
-            Assert.AreEqual(_scenarioContext.Get<string>("Currency"), _jobBoardPage.GetValueFromCurrencyComboBox(), "Currencies should be equals");
+            Assert.Equal(_scenarioContext.Get<string>("Currency"), _jobBoardPage.GetValueFromCurrencyComboBox());
         }
     }
 }
