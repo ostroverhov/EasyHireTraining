@@ -1,8 +1,8 @@
 ﻿using Framework.Drivers;
-using Framework.Utils;
 using NUnit.Framework;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
+using SpecFlowEasyHire.Utils;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowEasyHire.Steps
@@ -11,7 +11,7 @@ namespace SpecFlowEasyHire.Steps
     public sealed class MyAccountHeaderFormSteps
     {
         private readonly MyAccountHeaderForm _myAccountHeaderForm;
-        private static readonly SignUpUser TestUser = JsonReader.SetConfigModel<SignUpUser>();
+        private static readonly SignUpUser TestUser = DataBaseUtils.GetFirstTestUser();
 
         public MyAccountHeaderFormSteps(BrowserFactory browserFactory)
         {

@@ -1,5 +1,7 @@
 {
   "Browser": "chrome",
   "Url": "https://web.automation.easyhire.me",
-  "ImplicitlyWait": 15
+  "ImplicitlyWait": 15,
+  "IsRemote": false,
+  "RemoteUrl": "http://localhost:4444/wd/hub"
 }

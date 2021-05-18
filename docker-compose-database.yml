@@ -1,0 +1,11 @@
+# To execute this docker-compose yml file use `docker-compose -f docker-compose-database.yml up`
+# Then restore database from dump `docker exec -i {container ID} sh -c "exec mysql TestData -uroot -ptest" < dump.sql`
+version: "3"
+services:
+  mysql-development:
+    image: mysql:8.0.17
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: TestData
+    ports:
+      - "3308:3306"   
