@@ -5,6 +5,7 @@ using Framework.Utils;
 using Humanizer;
 using NUnit.Framework;
 using NUnit.Framework.Interfaces;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowEasyHire.Hooks
@@ -13,6 +14,7 @@ namespace SpecFlowEasyHire.Hooks
     public class Hooks
     {
         private const string PageSourceFormat = ".html";
+        private const string ScreenshotFormat = ".png";
         private static string ScenarioName => TestContext.CurrentContext.Test.Name.Replace("_", string.Empty).Humanize();
         private static Logger Logger => Logger.Instance;
         
@@ -29,6 +31,7 @@ namespace SpecFlowEasyHire.Hooks
         public static void AfterScenario(BrowserFactory browserFactory)
         {
             SavePageSource(browserFactory);
+            TakeScreenshot(browserFactory);
             BrowserFactory.CloseBrowser(browserFactory.Current);
             LogTestResults();
         }
@@ -49,6 +52,12 @@ namespace SpecFlowEasyHire.Hooks
             var source = ScenarioName + PageSourceFormat;
             File.WriteAllText(source, browserFactory.Current.PageSource);
             TestContext.AddTestAttachment(source);
+        }
+        
+        private static void TakeScreenshot(BrowserFactory browserFactory)
+        {
+            Logger.Info($"Save screenshot for [{ScenarioName}]");
+            ((ITakesScreenshot)browserFactory.Current).GetScreenshot().SaveAsFile(ScenarioName + ScreenshotFormat);
         }
     }
 }
