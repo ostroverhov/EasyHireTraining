@@ -27,8 +27,10 @@ namespace Framework.Drivers
             switch (BrowserSettings.Browser)
             {
                 case "chrome":
+                    ChromeOptions options = new ChromeOptions();
+                    options.AddAdditionalCapability("resolution", "1920x1080", true);
                     new DriverManager().SetUpDriver(new ChromeConfig());
-                    driver = new ChromeDriver();
+                    driver = new ChromeDriver(options);
                     break;
                 case "firefox":
                     new DriverManager().SetUpDriver(new FirefoxConfig());
