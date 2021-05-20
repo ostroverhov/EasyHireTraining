@@ -55,7 +55,7 @@ namespace Framework.Drivers
         public static void SetMaxSizeWindow(IWebDriver driver) 
         {
             Logger.Info($"Set max size window");
-            driver.Manage().Window.Size = new Size(1530, 818);
+            driver.Manage().Window.Size = new Size(1920, 1080);
             driver.Manage().Window.Maximize();
         }
 
