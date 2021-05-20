@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using Framework.Models;
 using Framework.Utils;
@@ -27,10 +28,8 @@ namespace Framework.Drivers
             switch (BrowserSettings.Browser)
             {
                 case "chrome":
-                    ChromeOptions options = new ChromeOptions();
-                    options.AddAdditionalCapability("resolution", "1920x1080", true);
                     new DriverManager().SetUpDriver(new ChromeConfig());
-                    driver = new ChromeDriver(options);
+                    driver = new ChromeDriver();
                     break;
                 case "firefox":
                     new DriverManager().SetUpDriver(new FirefoxConfig());
@@ -56,6 +55,7 @@ namespace Framework.Drivers
         public static void SetMaxSizeWindow(IWebDriver driver) 
         {
             Logger.Info($"Set max size window");
+            driver.Manage().Window.Size = new Size(1530, 818);
             driver.Manage().Window.Maximize();
         }
 
