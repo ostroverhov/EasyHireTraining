@@ -23,8 +23,9 @@ namespace Framework.Drivers
         public IWebDriver InitBrowser()
         {
             IWebDriver driver = null;
-            Logger.Info($"Browser [{BrowserSettings.Browser}] init");
-            switch (BrowserSettings.Browser)
+            var browser = Environment.GetEnvironmentVariable("testBrowser") ?? BrowserSettings.Browser; 
+            Logger.Info($"Browser [{browser}] init");
+            switch (browser)
             {
                 case "chrome":
                     new DriverManager().SetUpDriver(new ChromeConfig());
