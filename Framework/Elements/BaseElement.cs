@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace Framework.Elements
 {
-    public abstract class BaseElement
+    public class BaseElement
     {
         protected readonly string Name;
         private readonly By _locator;
@@ -34,6 +34,11 @@ namespace Framework.Elements
         public bool IsDisplayed() {
             Logger.Info($"Is element [{Name}] displayed");
             return GetElement().Displayed;
+        }
+        
+        public bool IsSelected() {
+            Logger.Info($"Is element [{Name}] selected");
+            return GetElement().Selected;
         }
         
         public bool IsPresent() {

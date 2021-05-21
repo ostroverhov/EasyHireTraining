@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Humanizer;
 using Newtonsoft.Json;
 using NUnit.Framework;
@@ -70,7 +71,7 @@ namespace SpecFlowEasyHire.Steps.TestRailApi
         public void WhenUriForGetAllProjects()
         {
             _scenarioContext.Set<IRestRequest>(new RestRequest(ApiConstants.GetProjectsUri, Method.GET)
-                .AddHeader("Authorization", ApiConstants.BasicToken));
+                .AddHeader("Authorization", GetBasicToken()));
         }
 
         [When("uri for delete last project")]
@@ -87,9 +88,15 @@ namespace SpecFlowEasyHire.Steps.TestRailApi
             _scenarioContext.Set(JsonConvert.DeserializeObject<List<Project>>(allProjectsResponse.Content).Last().Id,
                 "LastProjectId");
         }
+
+        private IRestRequest GetRequest(string uri, Method method)
+        {
+            return new RestRequest(uri, method)
+                .AddHeader("Content-Type", "application/json")
+                .AddHeader("Authorization", GetBasicToken());
+        } 
         
-        private IRestRequest GetRequest(string uri, Method method) => new RestRequest(uri, method)
-            .AddHeader("Content-Type", "application/json")
-            .AddHeader("Authorization", ApiConstants.BasicToken);
+        private string GetBasicToken() => "Basic " + System.Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1")
+            .GetBytes(ApiConstants.TestUserName + ":" + ApiConstants.TestUserPassword));
     }
 }

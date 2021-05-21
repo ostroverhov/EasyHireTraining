@@ -29,11 +29,11 @@ namespace Framework.Drivers
             {
                 case "chrome":
                     new DriverManager().SetUpDriver(new ChromeConfig());
-                    driver = new ChromeDriver();
+                    driver = new ChromeDriver(BrowserOptions.GetChromeOptions());
                     break;
                 case "firefox":
                     new DriverManager().SetUpDriver(new FirefoxConfig());
-                    driver = new FirefoxDriver();
+                    driver = new FirefoxDriver(BrowserOptions.GetFirefoxOptions());
                     break;
             }
             return driver;
