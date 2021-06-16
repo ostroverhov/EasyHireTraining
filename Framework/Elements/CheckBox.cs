@@ -2,17 +2,10 @@
 
 namespace Framework.Elements
 {
-    public class CheckBox 
+    public class CheckBox : BaseElement
     {
-        private readonly BaseElement _element;
-        
-        public CheckBox(string name, By locator, IWebDriver webDriver)
+        public CheckBox(string name, By locator, IWebDriver webDriver) : base($"{name} {nameof(CheckBox)}", locator, webDriver)
         {
-            _element = new BaseElement($"{name} {nameof(CheckBox)}", locator, webDriver);
         }
-
-        public void Click() => _element.Click();
-
-        public bool IsSelected() => _element.IsSelected();
     }
 }

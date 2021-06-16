@@ -2,17 +2,10 @@
 
 namespace Framework.Elements
 {
-    public class Button
+    public class Button : BaseElement
     {
-        private readonly BaseElement _element;
-        
-        public Button(string name, By locator, IWebDriver webDriver)
+        public Button(string name, By locator, IWebDriver webDriver) : base($"{name} {nameof(Button)}", locator, webDriver)
         {
-            _element = new BaseElement($"{name} {nameof(Button)}", locator, webDriver);
         }
-
-        public void Click() => _element.Click();
-
-        public bool IsPresent() => _element.IsPresent();
     }
 }

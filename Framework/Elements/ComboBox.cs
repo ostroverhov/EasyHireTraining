@@ -3,21 +3,14 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Framework.Elements
 {
-    public class ComboBox 
+    public class ComboBox : BaseElement
     {
-        private readonly BaseElement _element;
-        
-        public ComboBox(string name, By locator, IWebDriver webDriver)
+        public ComboBox(string name, By locator, IWebDriver webDriver) : base($"{name} {nameof(ComboBox)}", locator, webDriver)
         {
-            _element = new BaseElement($"{name} {nameof(ComboBox)}", locator, webDriver);
         }
 
-        public void Click() => _element.Click();
-
-        public string GetValue() => _element.GetValue();
-
-        public void SelectByValue(string value) => new SelectElement(_element.GetElement()).SelectByValue(value);
+        public void SelectByValue(string value) => new SelectElement(GetElement()).SelectByValue(value);
         
-        public void SelectByText(string text) => new SelectElement(_element.GetElement()).SelectByText(text);
+        public void SelectByText(string text) => new SelectElement(GetElement()).SelectByText(text);
     }
 }

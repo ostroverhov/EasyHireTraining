@@ -13,8 +13,15 @@ namespace Framework.Drivers
     public class BrowserFactory
     {
         private static Logger Logger => Logger.Instance;
+        
         private static  readonly BrowserSettings BrowserSettings = JsonReader.SetConfigModel<BrowserSettings>();
+        
         private readonly Lazy<IWebDriver> _currentWebDriverLazy;
+
+        private const string Chrome = "chrome";
+
+        private const string Firefox = "firefox";
+        
         public BrowserFactory()
         {
             _currentWebDriverLazy = new Lazy<IWebDriver>(InitBrowser);
@@ -27,11 +34,11 @@ namespace Framework.Drivers
             Logger.Info($"Browser [{browser}] init");
             switch (browser)
             {
-                case "chrome":
+                case Chrome:
                     new DriverManager().SetUpDriver(new ChromeConfig());
                     driver = new ChromeDriver(BrowserOptions.GetChromeOptions());
                     break;
-                case "firefox":
+                case Firefox:
                     new DriverManager().SetUpDriver(new FirefoxConfig());
                     driver = new FirefoxDriver(BrowserOptions.GetFirefoxOptions());
                     break;

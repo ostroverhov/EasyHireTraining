@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
 using Humanizer;
 using Newtonsoft.Json;
-using NUnit.Framework;
 using RestSharp;
+using RestSharp.Serialization.Json;
 using SpecFlowEasyHire.Constants;
 using SpecFlowEasyHire.Models.HttpModels.Request;
 using SpecFlowEasyHire.Models.HttpModels.Response;
 using SpecFlowEasyHire.Utils;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowEasyHire.Steps.TestRailApi
@@ -47,24 +49,20 @@ namespace SpecFlowEasyHire.Steps.TestRailApi
         [Then("check status code (.*)")]
         public void ThenCheckStatusCode(string statusCode)
         {
-            Assert.AreEqual(statusCode, _scenarioContext.Get<IRestResponse>().StatusCode.Humanize(), $"Status code should be equals [{statusCode}]");
+            _scenarioContext.Get<IRestResponse>().StatusCode.Humanize().Should().Be(statusCode);
         }
 
         [Then("check project body from response")]
         public void ThenCheckProjectBodyFromResponse()
         {
-            var projectResponse = JsonConvert.DeserializeObject<Project>(_scenarioContext.Get<IRestResponse>().Content);
-            Assert.Multiple(() =>
+            var projectResponse = new JsonDeserializer().Deserialize<Project>(_scenarioContext.Get<IRestResponse>());
+            using(new AssertionScope())
             {
-                Assert.AreEqual(_scenarioContext.Get<AddProjectData>().Name, projectResponse.Name,
-                    "Name should be equals");
-                Assert.AreEqual(_scenarioContext.Get<AddProjectData>().Announcement, projectResponse.Announcement,
-                    "Announcement should be equals");
-                Assert.AreEqual(_scenarioContext.Get<AddProjectData>().ShowAnnouncement,
-                    projectResponse.ShowAnnouncement, "Show announcement should be equals");
-                Assert.AreEqual(_scenarioContext.Get<AddProjectData>().SuiteMode, projectResponse.SuiteMode,
-                    "Suite mode should be equals");
-            });
+                projectResponse.Name.Should().Be(_scenarioContext.Get<AddProjectData>().Name);
+                projectResponse.Announcement.Should().Be(_scenarioContext.Get<AddProjectData>().Announcement);
+                projectResponse.ShowAnnouncement.Should().Be(_scenarioContext.Get<AddProjectData>().ShowAnnouncement);
+                projectResponse.SuiteMode.Should().Be(_scenarioContext.Get<AddProjectData>().SuiteMode);
+            }
         }
 
         [When("uri for get all projects")]
@@ -85,7 +83,7 @@ namespace SpecFlowEasyHire.Steps.TestRailApi
         public void WhenGetIdLastProject()
         {
             var allProjectsResponse = new RestClient(ApiConstants.BaseApiUrl).Execute(GetRequest(ApiConstants.GetProjectsUri, Method.GET));
-            _scenarioContext.Set(JsonConvert.DeserializeObject<List<Project>>(allProjectsResponse.Content).Last().Id,
+            _scenarioContext.Set(new JsonDeserializer().Deserialize<List<Project>>(allProjectsResponse).Last().Id,
                 "LastProjectId");
         }
 

@@ -1,5 +1,6 @@
 ﻿using Framework.Drivers;
 using NUnit.Framework;
+using SpecFlowEasyHire.Enums;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
 
@@ -16,7 +17,7 @@ namespace SpecFlowEasyHire.Steps
         }
 
         [When("click header button (.*)")]
-        public void WhenClickHeaderButton(HeaderForm.HeaderButtonItem item)
+        public void WhenClickHeaderButton(HeaderButtonItem item)
         {
             _headerForm.ClickHeaderButton(item);
         }

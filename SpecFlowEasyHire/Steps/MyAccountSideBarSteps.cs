@@ -1,5 +1,5 @@
-﻿using Framework.Drivers;
-using NUnit.Framework;
+﻿using FluentAssertions;
+using Framework.Drivers;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
 
@@ -18,7 +18,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("my account side bar should be presented")]
         public void ThenMyAccountSideBarShouldBePresented()
         {
-            Assert.IsTrue(_myAccountSideBar.IsPagePresent(), "My account side bar should be presented");
+            _myAccountSideBar.IsPagePresent().Should().BeTrue("My account side bar should be presented");
         }
     }
 }

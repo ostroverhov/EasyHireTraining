@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Framework.Elements;
 using OpenQA.Selenium;
+using SpecFlowEasyHire.Enums;
 
 namespace SpecFlowEasyHire.Pages.Forms
 {
@@ -25,16 +26,5 @@ namespace SpecFlowEasyHire.Pages.Forms
         };
 
         public void ClickHeaderButton(HeaderButtonItem item) => HeaderButton(item).Click();
-        
-        public enum HeaderButtonItem
-        {
-            Pricing,
-            JobBoard,
-            Demo,
-            ForCandidate,
-            Blog,
-            AboutUs,
-            LogIn
-        }
     }
 }

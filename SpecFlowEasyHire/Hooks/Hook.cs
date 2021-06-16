@@ -14,8 +14,11 @@ namespace SpecFlowEasyHire.Hooks
     public class Hooks
     {
         private const string PageSourceFormat = ".html";
+        
         private const string ScreenshotFormat = ".png";
+        
         private static string ScenarioName => TestContext.CurrentContext.Test.Name.Replace("_", string.Empty).Humanize();
+        
         private static Logger Logger => Logger.Instance;
         
         [BeforeScenario("web")]

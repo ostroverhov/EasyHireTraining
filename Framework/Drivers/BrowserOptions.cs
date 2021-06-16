@@ -7,14 +7,14 @@ namespace Framework.Drivers
     {
         public static ChromeOptions GetChromeOptions()
         {
-            ChromeOptions chromeOptions = new ChromeOptions();
+            var chromeOptions = new ChromeOptions();
             chromeOptions.AddArgument("start-maximized");
             return chromeOptions;
         }
 
         public static FirefoxOptions GetFirefoxOptions()
         {
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
+            var firefoxOptions = new FirefoxOptions();
             firefoxOptions.AddArgument("--start-maximized");
             return firefoxOptions;
         }

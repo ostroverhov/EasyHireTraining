@@ -1,7 +1,7 @@
-﻿using System;
+﻿using FluentAssertions;
 using Framework.Drivers;
-using NUnit.Framework;
 using SpecFlowEasyHire.Pages.Forms;
+using System;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowEasyHire.Steps
@@ -19,7 +19,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("take interview form should be presented")]
         public void ThenSignUpFormShouldBePresented()
         {
-            Assert.IsTrue(_takeInterviewForm.IsPagePresent(), "Take interview form should be presented");
+            _takeInterviewForm.IsPagePresent().Should().BeTrue("Take interview form should be presented");
         }
 
         [When("select random interview language on take interview form")]
@@ -63,8 +63,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("check take interview alert message")]
         public void ThenCheckTakeInterviewAlertMessage()
         {
-            StringAssert.Contains(_takeInterviewForm.GetTextFromTakeInterviewAlert(), "The Interview invitation is sent. Please, check your e-mail.", 
-                "Take interview alert message is not correct");
+            _takeInterviewForm.GetTextFromTakeInterviewAlert().Should().Contain("The Interview invitation is sent. Please, check your e-mail.");
         }
     }
 }

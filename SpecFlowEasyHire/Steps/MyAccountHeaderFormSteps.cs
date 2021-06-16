@@ -1,8 +1,10 @@
-﻿using Framework.Drivers;
+﻿using FluentAssertions;
+using FluentAssertions.Execution;
+using Framework.Drivers;
 using Framework.Utils;
-using NUnit.Framework;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
+using System.Reflection;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowEasyHire.Steps
@@ -11,6 +13,7 @@ namespace SpecFlowEasyHire.Steps
     public sealed class MyAccountHeaderFormSteps
     {
         private readonly MyAccountHeaderForm _myAccountHeaderForm;
+        //var resourcePath = $"{Assembly.GetCallingAssembly().GetName().Name}.Resources.SignUpUser.json";
         private static readonly SignUpUser TestUser = JsonReader.SetConfigModel<SignUpUser>();
 
         public MyAccountHeaderFormSteps(BrowserFactory browserFactory)
@@ -21,7 +24,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("my account header form should be presented")]
         public void ThenMyAccountHeaderFormShouldBePresented()
         {
-            Assert.IsTrue(_myAccountHeaderForm.IsPagePresent(), "My account header form should be presented");
+            _myAccountHeaderForm.IsPagePresent().Should().BeTrue("My account header form should be presented");
         }
         
         [When("click menu button on my account")]
@@ -33,7 +36,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("side menu on my account is present")]
         public void ThenSideMenuOnMyAccountIsPresent()
         {
-            Assert.IsTrue(_myAccountHeaderForm.IsSideMenuPresent(), "Side menu should be presented");
+            _myAccountHeaderForm.IsSideMenuPresent().Should().BeTrue("Side menu should be presented");
         }
         
         [When("click button (.*) on side menu on my account")]
@@ -45,18 +48,18 @@ namespace SpecFlowEasyHire.Steps
         [Then("user profile on my account is present")]
         public void ThenUserProfileOnMyAccountIsPresent()
         {
-            Assert.IsTrue(_myAccountHeaderForm.IsUserProfilePresent(), "User profile should be presented");
+            _myAccountHeaderForm.IsUserProfilePresent().Should().BeTrue("User profile should be presented");
         }
         
         [Then("check profile information on my account")]
         public void ThenCheckProfileInformationOnMyAccount()
         {
-            Assert.Multiple(() =>
+            using (new AssertionScope())
             {
-                Assert.AreEqual(TestUser.FirstName, _myAccountHeaderForm.GetValueFromFirstNameLabel, "First names should be equal");
-                Assert.AreEqual(TestUser.LastName, _myAccountHeaderForm.GetValueFromLastNameLabel, "Last names should be equal");
-                Assert.AreEqual(TestUser.Email, _myAccountHeaderForm.GetValueFromEmailLabel, "emails should be equal");
-            });
+                _myAccountHeaderForm.GetValueFromFirstNameLabel.Should().Be(TestUser.FirstName);
+                _myAccountHeaderForm.GetValueFromLastNameLabel.Should().Be(TestUser.LastName);
+                _myAccountHeaderForm.GetValueFromEmailLabel.Should().Be(TestUser.Email);
+            }
         }
     }
 }

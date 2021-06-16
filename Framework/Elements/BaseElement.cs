@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Framework.Extensions;
 using Framework.Utils;
 using OpenQA.Selenium;
@@ -7,9 +8,12 @@ namespace Framework.Elements
 {
     public class BaseElement
     {
-        protected readonly string Name;
+        protected string Name { get; }
+        
         private readonly By _locator;
+        
         private readonly IWebDriver _webDriver;
+        
         protected static Logger Logger => Logger.Instance;
 
         public BaseElement(string name, By locator, IWebDriver webDriver)
@@ -33,7 +37,14 @@ namespace Framework.Elements
         
         public bool IsDisplayed() {
             Logger.Info($"Is element [{Name}] displayed");
-            return GetElement().Displayed;
+            try
+            {
+                return GetElement().Displayed;
+            } catch(NoSuchElementException e)
+            {
+                Logger.Error(e.Message);
+                throw;
+            }
         }
         
         public bool IsSelected() {
@@ -84,7 +95,6 @@ namespace Framework.Elements
         public string GetElementTextFromList(int elementNumber)
         {
             Logger.Info($"Get text from element [{elementNumber}] from List [{Name}]");
-            GetElements()[elementNumber].WaitForText(_webDriver);
             return GetElements()[elementNumber].Text;
         }
     }
