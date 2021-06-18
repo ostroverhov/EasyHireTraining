@@ -7,12 +7,12 @@ namespace SpecFlowEasyHire.Pages.Forms
 {
     public class HeaderForm : BasePage
     {
-        public HeaderForm(IWebDriver webDriver) : base(nameof(HeaderForm), By.CssSelector("[alt=logo]"), webDriver)
+        public HeaderForm() : base(nameof(HeaderForm), By.CssSelector("[alt=logo]"))
         {
         }
 
         private Button HeaderButton(HeaderButtonItem item) => 
-            new Button($"Header button [{item}]", By.XPath($"//span[contains(text(), '{NameHeaderButton[item]}') and @class='MuiButton-label']"), WebDriver);
+            new Button($"Header button [{item}]", By.XPath($"//span[contains(text(), '{NameHeaderButton[item]}') and @class='MuiButton-label']"));
         
         private IDictionary<HeaderButtonItem, string> NameHeaderButton => new Dictionary<HeaderButtonItem, string>
         {

@@ -1,4 +1,5 @@
-﻿using Framework.Extensions;
+﻿using Framework.Drivers;
+using Framework.Extensions;
 using Framework.Utils;
 using OpenQA.Selenium;
 
@@ -8,20 +9,18 @@ namespace SpecFlowEasyHire.Pages
     {
         private readonly string _namePage;
         private readonly By _locator;
-        public readonly IWebDriver WebDriver;
         private static Logger Logger => Logger.Instance;
 
-        protected BasePage(string namePage, By locator, IWebDriver webDriver)
+        protected BasePage(string namePage, By locator)
         {
             _namePage = namePage;
             _locator = locator;
-            WebDriver = webDriver;
         }
 
         public bool IsPagePresent()
         {
             Logger.Info($"Is page [{_namePage}] opened");
-            return WebDriver.FindElement(_locator).WaitForDisplayed(WebDriver);
+            return BrowserFactory.GetDriver().FindElement(_locator).WaitForDisplayed(BrowserFactory.GetDriver());
         }
     }
 }

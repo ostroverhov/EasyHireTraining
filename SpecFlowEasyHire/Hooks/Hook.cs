@@ -22,20 +22,21 @@ namespace SpecFlowEasyHire.Hooks
         private static Logger Logger => Logger.Instance;
         
         [BeforeScenario("web")]
-        public static void BeforeScenario(BrowserFactory browserFactory)
+        public static void BeforeScenario()
         {
             Logger.Info($"{new string('=', 100)} {Environment.NewLine} {new string(' ', 40)} Start scenario [{ScenarioName}]");
-            BrowserFactory.SetMaxSizeWindow(browserFactory.Current);
-            BrowserFactory.SetImplicitlyWait(browserFactory.Current);
-            BrowserFactory.SetUrl(browserFactory.Current);
+            BrowserFactory.GetDriver();
+            BrowserFactory.SetMaxSizeWindow();
+            BrowserFactory.SetImplicitlyWait();
+            BrowserFactory.SetUrl();
         }
         
         [AfterScenario("web")]
-        public static void AfterScenario(BrowserFactory browserFactory)
+        public static void AfterScenario()
         {
-            SavePageSource(browserFactory);
-            TakeScreenshot(browserFactory);
-            BrowserFactory.CloseBrowser(browserFactory.Current);
+            //SavePageSource(BrowserFactory.GetDriver);
+            //TakeScreenshot(BrowserFactory.GetDriver);
+            BrowserFactory.CloseBrowser();
             LogTestResults();
         }
         
@@ -49,18 +50,18 @@ namespace SpecFlowEasyHire.Hooks
             }
         }
 
-        private static void SavePageSource(BrowserFactory browserFactory)
-        {
-            Logger.Info($"Save page source for [{ScenarioName}]");
-            var source = ScenarioName + PageSourceFormat;
-            File.WriteAllText(source, browserFactory.Current.PageSource);
-            TestContext.AddTestAttachment(source);
-        }
+        //private static void SavePageSource(BrowserFactory browserFactory)
+        //{
+        //    Logger.Info($"Save page source for [{ScenarioName}]");
+        //    var source = ScenarioName + PageSourceFormat;
+        //    File.WriteAllText(source, browserFactory.Current.PageSource);
+        //    TestContext.AddTestAttachment(source);
+        //}
         
-        private static void TakeScreenshot(BrowserFactory browserFactory)
-        {
-            Logger.Info($"Save screenshot for [{ScenarioName}]");
-            ((ITakesScreenshot)browserFactory.Current).GetScreenshot().SaveAsFile(ScenarioName + ScreenshotFormat);
-        }
+        //private static void TakeScreenshot(BrowserFactory browserFactory)
+        //{
+        //    Logger.Info($"Save screenshot for [{ScenarioName}]");
+        //    ((ITakesScreenshot)browserFactory.Current).GetScreenshot().SaveAsFile(ScenarioName + ScreenshotFormat);
+        //}
     }
 }

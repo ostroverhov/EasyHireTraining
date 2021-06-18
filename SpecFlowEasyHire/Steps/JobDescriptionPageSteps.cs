@@ -10,9 +10,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly JobDescriptionPage _jobDescriptionPage;
 
-        public JobDescriptionPageSteps(BrowserFactory browserFactory)
+        public JobDescriptionPageSteps()
         {
-            _jobDescriptionPage = new JobDescriptionPage(browserFactory.Current);
+            _jobDescriptionPage = new JobDescriptionPage();
         }
 
         [Then("job description page is present")]
@@ -20,13 +20,13 @@ namespace SpecFlowEasyHire.Steps
         {
             _jobDescriptionPage.IsPagePresent().Should().BeTrue("Job description page should be present");
         }
-        
+
         [Then("job title is present")]
         public void ThenJobTitleIsPresent()
         {
             _jobDescriptionPage.IsJobTitlePresent().Should().BeTrue("Job title should be present");
         }
-        
+
         [Then("job description is present")]
         public void ThenJobDescriptionIsPresent()
         {

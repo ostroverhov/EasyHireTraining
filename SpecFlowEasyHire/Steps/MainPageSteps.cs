@@ -10,9 +10,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly MainPage _mainPage;
 
-        public MainPageSteps(BrowserFactory browserFactory)
+        public MainPageSteps()
         {
-            _mainPage = new MainPage(browserFactory.Current);
+            _mainPage = new MainPage();
         }
 
         [Given("main page is present")]
@@ -30,7 +30,7 @@ namespace SpecFlowEasyHire.Steps
         [When("switch to last tab")]
         public void WhenSwitchToLastTab()
         {
-            BrowserFactory.SwitchToLastTab(_mainPage.WebDriver);            
+            BrowserFactory.SwitchToLastTab();            
         }
     }
 }

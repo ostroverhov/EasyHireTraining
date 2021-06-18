@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Framework.Drivers;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
@@ -11,9 +10,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly LoginForm _loginForm;
 
-        public LoginSteps(BrowserFactory browserFactory)
+        public LoginSteps()
         {
-            _loginForm = new LoginForm(browserFactory.Current);
+            _loginForm = new LoginForm();
         }
 
         [Then("login form should be presented")]

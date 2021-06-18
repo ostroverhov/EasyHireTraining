@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Framework.Extensions;
+﻿using System.Collections.Generic;
+using Framework.Drivers;
 using Framework.Utils;
 using OpenQA.Selenium;
 
@@ -12,27 +11,25 @@ namespace Framework.Elements
         
         private readonly By _locator;
         
-        private readonly IWebDriver _webDriver;
         
         protected static Logger Logger => Logger.Instance;
 
-        public BaseElement(string name, By locator, IWebDriver webDriver)
+        public BaseElement(string name, By locator)
         {
             Name = name;
             _locator = locator;
-            _webDriver = webDriver;
         }
         
         public IWebElement GetElement() 
         {
             Logger.Info($"Get element [{Name}]");
-            return _webDriver.FindElement(_locator);
+            return BrowserFactory.GetDriver().FindElement(_locator);
         }
 
         public IList<IWebElement> GetElements() 
         {
             Logger.Info($"Get list elements [{Name}]");
-            return _webDriver.FindElements(_locator);
+            return BrowserFactory.GetDriver().FindElements(_locator);
         }
         
         public bool IsDisplayed() {

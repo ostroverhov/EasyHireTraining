@@ -11,9 +11,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly HeaderForm _headerForm;
 
-        public HeaderSteps(BrowserFactory browserFactory)
+        public HeaderSteps()
         {
-            _headerForm = new HeaderForm(browserFactory.Current);
+            _headerForm = new HeaderForm();
         }
 
         [When("click header button (.*)")]

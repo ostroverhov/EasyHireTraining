@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Framework.Drivers;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
 
@@ -10,9 +9,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly MyAccountSideBar _myAccountSideBar;
 
-        public MyAccountSideBarSteps(BrowserFactory browserFactory)
+        public MyAccountSideBarSteps()
         {
-            _myAccountSideBar = new MyAccountSideBar(browserFactory.Current);
+            _myAccountSideBar = new MyAccountSideBar();
         }
 
         [Then("my account side bar should be presented")]

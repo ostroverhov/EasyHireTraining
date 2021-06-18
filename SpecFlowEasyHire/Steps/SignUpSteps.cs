@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Framework.Drivers;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
@@ -11,9 +10,9 @@ namespace SpecFlowEasyHire.Steps
     {
         private readonly SignUpForm _signUpForm;
 
-        public SignUpSteps(BrowserFactory browserFactory)
+        public SignUpSteps()
         {
-            _signUpForm = new SignUpForm(browserFactory.Current);
+            _signUpForm = new SignUpForm();
         }
 
         [Then("sign up form should be presented")]
@@ -27,7 +26,7 @@ namespace SpecFlowEasyHire.Steps
         {
             _signUpForm.SelectAccountType(item);
         }
-        
+
         [When("type sign up user data")]
         public void WhenTypeSignUpUserData(SignUpUser signUpUser)
         {
@@ -36,25 +35,25 @@ namespace SpecFlowEasyHire.Steps
                 .TypeLastName(signUpUser.LastName)
                 .TypePassword(signUpUser.Password);
         }
-        
+
         [When("click accept terms and conditions check box")]
         public void WhenClickAcceptTermsAndConditionsCheckBox()
         {
             _signUpForm.ClickTermsAndConditionsCheckBox();
         }
-        
+
         [When("click sign up button from sign up form")]
         public void WhenClickSignUpButtonFromSignUpForm()
         {
             _signUpForm.ClickSignUpButton();
         }
-        
+
         [Then("check sign up alert message")]
         public void ThenCheckSignUpAlertMessage()
         {
             _signUpForm.GetTextFromSignUpAlert().Should().Contain("Thank you for signing up! Please check your email to activate your account.");
         }
-        
+
         [Then("sign up button is not active")]
         public void ThenSignUpButtonIsNotActive()
         {

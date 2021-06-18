@@ -12,9 +12,9 @@ namespace SpecFlowEasyHire.Steps
         private readonly JobBoardPage _jobBoardPage;
         private readonly ScenarioContext _scenarioContext;
 
-        public JobBoardSteps(BrowserFactory browserFactory, ScenarioContext scenarioContext)
+        public JobBoardSteps(ScenarioContext scenarioContext)
         {
-            _jobBoardPage = new JobBoardPage(browserFactory.Current);
+            _jobBoardPage = new JobBoardPage();
             _scenarioContext = scenarioContext;
         }
 
@@ -29,20 +29,20 @@ namespace SpecFlowEasyHire.Steps
         {
             _jobBoardPage.ClickJobDescriptionItem(new Random().Next(_jobBoardPage.CountJobDescriptions()));
         }
-        
+
         [When("type search key word (.*)")]
         public void WhenTypeSearchKeyWord(string keyWord)
         {
             _scenarioContext.Set(keyWord, "keyWord");
             _jobBoardPage.TypeSearchText(keyWord);
         }
-        
+
         [Then("check search key word")]
         public void ThenCheckSearchKeyWord()
         {
             _jobBoardPage.GetValueFromSearchTextBox().Should().Be(_scenarioContext.Get<string>("keyWord"));
         }
-        
+
         [When("select random country")]
         public void WhenSelectRandomCountry()
         {
@@ -51,13 +51,13 @@ namespace SpecFlowEasyHire.Steps
             _scenarioContext.Set(_jobBoardPage.GetTextFromComboBox(randomCountry), "Country");
             _jobBoardPage.ClickComboBoxItem(randomCountry);
         }
-        
+
         [Then("check select by country field")]
         public void ThenCheckSelectByCountryField()
         {
             _jobBoardPage.GetValueFromSearchByCountryComboBox().Should().Be(_scenarioContext.Get<string>("Country"));
         }
-        
+
         [When("select random salary range")]
         public void WhenSelectRandomSalaryRange()
         {
@@ -66,13 +66,13 @@ namespace SpecFlowEasyHire.Steps
             _scenarioContext.Set(_jobBoardPage.GetTextFromComboBox(randomSalaryRange), "Salary");
             _jobBoardPage.ClickComboBoxItem(randomSalaryRange);
         }
-        
+
         [Then("check salary range field")]
         public void ThenCheckSalaryRangeField()
         {
             _jobBoardPage.GetValueFromSalaryRateComboBox().Should().Be(_scenarioContext.Get<string>("Salary"));
         }
-        
+
         [When("select random currency")]
         public void WhenSelectRandomCurrency()
         {
@@ -81,7 +81,7 @@ namespace SpecFlowEasyHire.Steps
             _scenarioContext.Set(_jobBoardPage.GetTextFromComboBox(randomSalaryRange), "Currency");
             _jobBoardPage.ClickComboBoxItem(randomSalaryRange);
         }
-        
+
         [Then("check currency field")]
         public void ThenCheckCurrencyField()
         {
