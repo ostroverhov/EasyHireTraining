@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Framework.Drivers;
+using SpecFlowEasyHire.Enums;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
 using TechTalk.SpecFlow;
@@ -23,7 +24,7 @@ namespace SpecFlowEasyHire.Steps
         }
 
         [When("select account (.*)")]
-        public void WhenSelectAccount(SignUpForm.AccountTypeItem item)
+        public void WhenSelectAccount(AccountTypeItem item)
         {
             _signUpForm.SelectAccountType(item);
         }

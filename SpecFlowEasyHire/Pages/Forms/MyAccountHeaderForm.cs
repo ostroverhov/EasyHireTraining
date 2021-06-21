@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Framework.Elements;
 using OpenQA.Selenium;
+using SpecFlowEasyHire.Enums;
 
 namespace SpecFlowEasyHire.Pages.Forms
 {
@@ -44,17 +45,5 @@ namespace SpecFlowEasyHire.Pages.Forms
         public string GetValueFromLastNameLabel => LastNameLabel.GetValue();
         
         public string GetValueFromEmailLabel => EmailLabel.GetValue();
-        
-        public enum SideMenuItem
-        {
-            Settings,
-            Teams,
-            Language,
-            ConnectivityTest,
-            InviteUsers,
-            Support,
-            Feedback,
-            LogOut
-        }
     }
 }

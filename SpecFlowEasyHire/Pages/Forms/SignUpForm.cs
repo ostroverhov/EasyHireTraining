@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using Framework.Elements;
+﻿using Framework.Elements;
 using OpenQA.Selenium;
+using SpecFlowEasyHire.Enums;
+using System.Collections.Generic;
 
 namespace SpecFlowEasyHire.Pages.Forms
 {
@@ -60,11 +61,5 @@ namespace SpecFlowEasyHire.Pages.Forms
         public bool IsSignUpButtonPresent() => SignUpButton.IsPresent();
 
         public string GetTextFromSignUpAlert() => SignUpAlertLabel.Text();
-
-        public enum AccountTypeItem
-        {
-            HiringManager,
-            Applicant
-        }
     }
 }

@@ -2,9 +2,9 @@
 using FluentAssertions.Execution;
 using Framework.Drivers;
 using Framework.Utils;
+using SpecFlowEasyHire.Enums;
 using SpecFlowEasyHire.Models;
 using SpecFlowEasyHire.Pages.Forms;
-using System.Reflection;
 using TechTalk.SpecFlow;
 
 namespace SpecFlowEasyHire.Steps
@@ -13,7 +13,6 @@ namespace SpecFlowEasyHire.Steps
     public sealed class MyAccountHeaderFormSteps
     {
         private readonly MyAccountHeaderForm _myAccountHeaderForm;
-        //var resourcePath = $"{Assembly.GetCallingAssembly().GetName().Name}.Resources.SignUpUser.json";
         private static readonly SignUpUser TestUser = JsonReader.SetConfigModel<SignUpUser>();
 
         public MyAccountHeaderFormSteps(BrowserFactory browserFactory)
@@ -40,7 +39,7 @@ namespace SpecFlowEasyHire.Steps
         }
         
         [When("click button (.*) on side menu on my account")]
-        public void WhenClickButtonOnSideMenuOnMyAccount(MyAccountHeaderForm.SideMenuItem item)
+        public void WhenClickButtonOnSideMenuOnMyAccount(SideMenuItem item)
         {
             _myAccountHeaderForm.ClickSideMenuButton(item);
         }

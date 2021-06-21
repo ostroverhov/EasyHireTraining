@@ -1,4 +1,5 @@
-﻿using Framework.Drivers;
+﻿using FluentAssertions;
+using Framework.Drivers;
 using NUnit.Framework;
 using SpecFlowEasyHire.Enums;
 using SpecFlowEasyHire.Pages.Forms;
@@ -25,7 +26,7 @@ namespace SpecFlowEasyHire.Steps
         [Then("header form is present")]
         public void ThenHeaderFormIsPresent()
         {
-            Assert.IsTrue(_headerForm.IsPagePresent(), "Header form should be presented");
+            _headerForm.IsPagePresent().Should().BeTrue("Header form should be presented");
         }
     }
 }
