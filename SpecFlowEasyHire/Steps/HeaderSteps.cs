@@ -1,0 +1,32 @@
+﻿using FluentAssertions;
+using Framework.Drivers;
+using NUnit.Framework;
+using SpecFlowEasyHire.Enums;
+using SpecFlowEasyHire.Pages.Forms;
+using TechTalk.SpecFlow;
+
+namespace SpecFlowEasyHire.Steps
+{
+    [Binding]
+    public sealed class HeaderSteps
+    {
+        private readonly HeaderForm _headerForm;
+
+        public HeaderSteps(BrowserFactory browserFactory)
+        {
+            _headerForm = new HeaderForm(browserFactory.Current);
+        }
+
+        [When("click header button (.*)")]
+        public void WhenClickHeaderButton(HeaderButtonItem item)
+        {
+            _headerForm.ClickHeaderButton(item);
+        }
+
+        [Then("header form is present")]
+        public void ThenHeaderFormIsPresent()
+        {
+            _headerForm.IsPagePresent().Should().BeTrue("Header form should be presented");
+        }
+    }
+}
